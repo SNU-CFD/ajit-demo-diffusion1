@@ -19,39 +19,7 @@ ddtSchemes
     default         steadyState; //Euler;
 }
 
-gradSchemes
-{
-    default         Gauss linear;
-    grad(p)         Gauss linear;
-}
 
-divSchemes
-{
-    default         none;
-    div(phi,U)      Gauss linear;
-}
 
-laplacianSchemes
-{
-    default         none;
-    laplacian(DT,T) Gauss linear corrected;
-}
-
-interpolationSchemes
-{
-    default         linear;
-    interpolate(HbyA) linear;
-}
-
-snGradSchemes
-{
-    default         corrected;
-}
-
-fluxRequired
-{
-    default         no;
-    p;
-}
 
 // ************************************************************************* //

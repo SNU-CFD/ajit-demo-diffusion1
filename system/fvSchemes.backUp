@@ -10,26 +10,49 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      fvSolution;
+    object      fvSchemes;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-solvers
+ddtSchemes
 {
-    T
-    {
-        solver           PCG;
-        preconditioner   DIC;
-        tolerance        1e-06;
-        relTol           0;
-    };
-
+    default         steadyState; //Euler;
 }
 
-SIMPLE
+gradSchemes
 {
-    nCorrectors     2;
-    nNonOrthogonalCorrectors 2;
+    default         none;
+    grad(T)         Gauss ;
+    snGradCorr(T)   leastSquares;
+}
+
+divSchemes
+{
+    default         none;
+    div(phi,U)      Gauss linear;
+}
+
+laplacianSchemes
+{
+    default         none;
+    laplacian(DT,T) Gauss; // linear corrected;
+}
+
+interpolationSchemes
+{
+    default         banana; //linear;
+//    interpolate(HbyA) linear;
+}
+
+snGradSchemes
+{
+    default         banana; //corrected;
+}
+
+fluxRequired
+{
+    default         no;
+    p;
 }
 
 // ************************************************************************* //
